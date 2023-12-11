@@ -1,26 +1,32 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { useState } from 'react';
+import quotes from './quotes.json';
+import {FaTwitter, FaQuoteLeft, FaQuoteRight} from "react-icons/fa"
 import './App.css';
 
+  interface Quote{
+    quote: string;
+    author: string;
+  }
+
+  const getRandomQuote = (): Quote => {
+    return quotes[Math.floor(Math.random() * quotes.length)]
+  }
+
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+
+
+  const [quote, setQuote] = useState<Quote>(getRandomQuote());
+
+  return <div className="background">
+    <div id="quote-box">
+      <div className="quote-content">
+        <FaQuoteLeft size="30" style={{marginRight: "10px"}} />
+        <h2 id="text">{quote.quote}</h2>
+        <FaQuoteRight size="30" style={{marginLeft: "10px"}} />
+        <h4 id="author">- {quote.author}</h4>
+      </div>
     </div>
-  );
+  </div>
 }
 
 export default App;
